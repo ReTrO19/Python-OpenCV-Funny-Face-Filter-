@@ -1,51 +1,46 @@
 import cv2
-from FaceDetails import FaceFeatureData
-from BlendingImages import overlay_transparent
-from RotateFrame import rotate_image
-
-filter_reset_value = 30
-overlay = cv2.imread('dog-face.png',cv2.IMREAD_UNCHANGED)
-# background = cv2.imread('face.jpg'
-# result = cv2.VideoWriter('output.mp4', 
-#                          cv2.VideoWriter_fourcc(*'XVID'),
-#                          10, (640,480))
-
-##cap = cv2.VideoCapture("D:\\My Programs\\output.mp4")
-cap = cv2.VideoCapture(0)
-
-while True:
-	ret,background = cap.read()
-
-	background = cv2.resize(background,(640,480))
-	overlay = cv2.imread('dog-face.png', cv2.IMREAD_UNCHANGED)
-	box_size_coord,retAngle = FaceFeatureData(background)
-	print(box_size_coord)
-	overlay_filter_resize = (box_size_coord[2] - box_size_coord[0],box_size_coord[3] - box_size_coord[1])
-	print(overlay_filter_resize)
-	# overlay = cv2.resize(overlay,(321,321))
-	if len(box_size_coord) > 0:
-		# overlay = rotate_image(overlay, 0)
-		overlay = cv2.resize(overlay,overlay_filter_resize)
-		overlay = rotate_image(overlay,-(90-int(retAngle)))
-		if box_size_coord[1] - filter_reset_value > 0:
-			background = overlay_transparent(background,overlay,box_size_coord[0],box_size_coord[1] - filter_reset_value)
-		else:
-			background = overlay_transparent(background, overlay, box_size_coord[0],
-											 box_size_coord[1])
+from utils.FaceDetails import FaceFeatureData
+from utils.BlendingImages import overlay_transparent
+from utils.RotateFrame import rotate_image
 
 
-		background = cv2.rectangle(background, (box_size_coord[0], box_size_coord[1]), (box_size_coord[2], box_size_coord[3]), (0, 0, 255), 2)
 
-	# result.write(background)
+def ApplyingFilterFunc(filter_reset_value,filter_image,angle_offset,resize_box_value,video_path):
 
-	# cv2.imshow('OUTPUT',background)
+	cap = cv2.VideoCapture(video_path)
 
-	cv2.imshow('OUTPUT2',background)
+	while True:
+		ret,background = cap.read()
 
-	if cv2.waitKey(1) & 0xFF == ord('q'):
-		break
+		background = cv2.resize(background,(640,480))
+		overlay = cv2.imread(filter_image, cv2.IMREAD_UNCHANGED)
+		box_size_coord,retAngle = FaceFeatureData(background,resize_box_value)
 
-cap.release()
-# result.release()
+		if len(box_size_coord) > 0:
+			overlay_filter_resize = (box_size_coord[2] - box_size_coord[0], box_size_coord[3] - box_size_coord[1])
+			# overlay = rotate_image(overlay, 0)
+			overlay = cv2.resize(overlay,overlay_filter_resize)
+			# overlay = rotate_image(overlay,-(90-int(retAngle))+10)
+			overlay = rotate_image(overlay,-(90 - int(retAngle)) - angle_offset)
+			# print(-(90-int(retAngle))+10)
+			if box_size_coord[1] - filter_reset_value > 0:
+				background = overlay_transparent(background,overlay,box_size_coord[0],box_size_coord[1] - filter_reset_value)
+			else:
+				background = overlay_transparent(background, overlay, box_size_coord[0],
+												 box_size_coord[1])
 
-cv2.destroyAllWindows()
+
+			# background = cv2.rectangle(background, (box_size_coord[0], box_size_coord[1]), (box_size_coord[2], box_size_coord[3]), (0, 0, 255), 2)
+
+
+		# cv2.imshow('OUTPUT',background)
+
+		cv2.imshow('OUTPUT2',background)
+
+		if cv2.waitKey(1) & 0xFF == ord('q'):
+			break
+
+	cap.release()
+	# result.release()
+
+	cv2.destroyAllWindows()

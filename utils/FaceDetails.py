@@ -1,15 +1,15 @@
 import face_recognition
 import cv2
-from CalculateAngle import getAngle
+from utils.CalculateAngle import getAngle
 
 
-def FaceFeatureData(image):
+def FaceFeatureData(image,resize_box_value):
 	frame = image.copy()
 	image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 	face_detect_list = []
 	mid_point = []
 	box_size_coord = []
-	resize_box_value = 20
+	# resize_box_value = 70
 
 
 	face_landmarks_list = face_recognition.face_landmarks(image)
@@ -30,11 +30,15 @@ def FaceFeatureData(image):
 			face_detect_list = [fl[0][3],fl[0][0], fl[0][1],
 								fl[0][2]]
 
-	p1 = [face_landmarks_list[0]['chin'][0][0], face_landmarks_list[0]['chin'][0][1]]
-	p2 = [face_detect_list[0], face_detect_list[3]]
+	# p1 = [face_landmarks_list[0]['chin'][0][0], face_landmarks_list[0]['chin'][0][1]]
+	# p2 = [face_detect_list[0], face_detect_list[3]]
+	# p3 = [face_detect_list[2], face_detect_list[3]]
+
+	p1 = [face_landmarks_list[0]['nose_bridge'][2][0], face_landmarks_list[0]['nose_bridge'][2][1]]
+	p2 = [face_landmarks_list[0]['chin'][8][0], face_landmarks_list[0]['chin'][8][1]]
 	p3 = [face_detect_list[2], face_detect_list[3]]
 
 	retAngle = getAngle(p1,p2,p3)
-
+	print(retAngle)
 	return face_detect_list,retAngle
 

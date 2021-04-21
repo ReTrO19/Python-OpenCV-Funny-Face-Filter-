@@ -11,5 +11,5 @@ def getAngle(p1,p2,p3):
     cosine_angle = np.dot(ba, bc) / (np.linalg.norm(ba) * np.linalg.norm(bc))
     angle = np.arccos(cosine_angle)
 
-    print(np.degrees(angle))
+    # print(np.degrees(angle))
     return np.degrees(angle)

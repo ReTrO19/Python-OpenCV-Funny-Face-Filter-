@@ -1,7 +1,7 @@
 from PIL import Image, ImageDraw
 import face_recognition
 import cv2
-from CalculateAngle import getAngle
+from utils.CalculateAngle import getAngle
 # Load the jpg file into a numpy array
 image = cv2.imread("face.jpg")
 image_rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
@@ -18,6 +18,8 @@ retAngle = getAngle(p1,p2,p3)
 
 print(retAngle)
 all_face_landmarks = list(face_landmarks_list[0].keys())
+
+print(all_face_landmarks)
 
 for current_part in all_face_landmarks:
     data_list = list(face_landmarks_list[0][current_part])
