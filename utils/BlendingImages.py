@@ -1,12 +1,6 @@
-
-
-# background = cv2.imread('face.jpg')
-# overlay = cv2.imread('dog-face.png',cv2.IMREAD_UNCHANGED)
-# overlay = cv2.resize(overlay,(450,321))
-##background = cv2.resize(background,(640,480))
-
 import cv2
 import numpy as np
+
 
 def overlay_transparent(background, overlay, x, y):
 

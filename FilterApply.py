@@ -10,8 +10,8 @@ overlay = cv2.imread('dog-face.png',cv2.IMREAD_UNCHANGED)
 #                          cv2.VideoWriter_fourcc(*'XVID'),
 #                          10, (640,480))
 
-cap = cv2.VideoCapture('output.mp4')
-##cap = cv2.VideoCapture('http://192.168.0.101:4747/video')
+##cap = cv2.VideoCapture("D:\\My Programs\\output.mp4")
+cap = cv2.VideoCapture(0)
 
 while True:
 	ret,background = cap.read()
@@ -34,7 +34,7 @@ while True:
 											 box_size_coord[1])
 
 
-		# background = cv2.rectangle(background, (box_size_coord[0][0], box_size_coord[0][1]), (box_size_coord[0][2], box_size_coord[0][3]), (0, 0, 255), 2)
+		background = cv2.rectangle(background, (box_size_coord[0], box_size_coord[1]), (box_size_coord[2], box_size_coord[3]), (0, 0, 255), 2)
 
 	# result.write(background)
 
