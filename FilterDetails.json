@@ -2,14 +2,14 @@
    "Filter_1":{
       "Filter-Image":"D:\\My Programs\\Augmented Reality\\Filter\\dog-face.png",
       "Filter-Reset-Value":30,
-      "Video-Path":"D:\\My Programs\\output.mp4",
+      "Video-Path":"http://192.168.0.102:4747/video",
       "Resize-Box_Value":20,
       "Angle-Offset":5
    },
    "Filter_2":{
       "Filter-Image":"D:\\My Programs\\Augmented Reality\\Filter\\Rabit.png",
       "Filter-Reset-Value":65,
-      "Video-Path":"D:\\My Programs\\output.mp4",
+      "Video-Path":"http://192.168.0.102:4747/video",
       "Resize-Box_Value":70,
       "Angle-Offset":20
    }
