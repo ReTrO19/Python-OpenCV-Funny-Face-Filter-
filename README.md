@@ -1,6 +1,6 @@
 # Python OpenCV Funny Face Filter
 
-![Project Image](img\TestGIf.gif)
+![Project Image](img/TestGIf.gif)
 
 > Where There Is Python There Is A Way 😜
 
@@ -67,7 +67,7 @@ In this project I have Tried to create funny face filter like use see inmost fam
     Select a Filter :(Select any filter you like I select Dog)
     1
 ```
-![ Dog-Filter ](img\dog-filter.png)
+![ Dog-Filter ](img/dog-filter.png)
 
 [Back To The Top](#read-me-template)
 
